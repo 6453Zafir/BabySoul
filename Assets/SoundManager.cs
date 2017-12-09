@@ -5,10 +5,10 @@ using UnityEngine;
 public class SoundManager : MonoSingleton<SoundManager>
 {
     // 用于播放背景音乐的音乐源  
-   
+
 
     // 用于播放音效的音乐源  
-    
+
 
 
     /*
@@ -54,7 +54,7 @@ public class SoundManager : MonoSingleton<SoundManager>
     }
     */
     // 播放背景音乐，传进一个音频剪辑的name  
-    private void PlayLoopSound(object bgName, bool restart = false,bool isLoop = true)
+    private void PlayLoopSound(object bgName, bool restart = false, bool isLoop = true)
     {
         bool isAudioSourceExsit = false;
         AudioSource[] audioSources = gameObject.GetComponents<AudioSource>();
@@ -65,7 +65,8 @@ public class SoundManager : MonoSingleton<SoundManager>
                 isAudioSourceExsit = true;
             }
         }
-        if (!isAudioSourceExsit) {
+        if (!isAudioSourceExsit)
+        {
             AudioSource m_bgMusic;
             m_bgMusic = gameObject.AddComponent<AudioSource>();
             m_bgMusic.loop = true;    //开启循环  
@@ -107,17 +108,18 @@ public class SoundManager : MonoSingleton<SoundManager>
             }
 
         }
-      
+
     }
     public void StopSound(string bgClipname)
     {
         AudioSource[] audioSources = gameObject.GetComponents<AudioSource>();
-        foreach (AudioSource ad in audioSources) {
+        foreach (AudioSource ad in audioSources)
+        {
             if (ad.clip.name.Equals(bgClipname) && ad.isPlaying)
             {
                 UnityEngine.Debug.Log("已暂停");
                 Destroy(ad);
-                
+
             }
         }
     }
@@ -170,8 +172,8 @@ public class SoundManager : MonoSingleton<SoundManager>
             //指定点播放  
             AudioSource.PlayClipAtPoint(clip, Camera.main.transform.position, volume);
         }
-        StartCoroutine(destoryClipAfterPlayed(clip.length,m_effectMusic));
-        
+        StartCoroutine(destoryClipAfterPlayed(clip.length, m_effectMusic));
+
     }
 
     //播放各种音频剪辑的调用方法，AudioClass是提前写好的存放各种音乐名称的枚举类，便于外面直接调用  
@@ -191,7 +193,8 @@ public class SoundManager : MonoSingleton<SoundManager>
     }
 
 
-    IEnumerator destoryClipAfterPlayed(float waittime,AudioSource ad) {
+    IEnumerator destoryClipAfterPlayed(float waittime, AudioSource ad)
+    {
         yield return new WaitForSeconds(waittime);
         Destroy(ad);
     }
