@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SpearLogic : MonoBehaviour {
-	Vector3 move_direction = Vector3.zero;
+	Transform move_direction;
 	Ray ray;
 
 	// Use this for initialization
@@ -12,17 +12,16 @@ public class SpearLogic : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		this.transform.position += move_direction * Time.deltaTime;
-		ray = new Ray (this.transform.position - move_direction * Time.deltaTime, this.transform.position + move_direction * Time.deltaTime);
-		RaycastHit raycastHit = new RaycastHit ();
-		if (Physics.Raycast (ray, out raycastHit, 3f, 1 << 8)) {
-			Destroy (raycastHit.transform.gameObject);
+		this.transform.position += (move_direction.position - this.transform.position) * 10f * Time.deltaTime;
+		this.transform.LookAt (move_direction);
+		if (Vector3.Distance (this.transform.position, move_direction.position) < 1.0f) {
+			Destroy (move_direction.gameObject);
+			Destroy (this.gameObject);
 		}
 	}
 
-	public void Throw(Vector3 pos){
-		move_direction = 30 * Vector3.Normalize (pos - this.transform.position);
-		move_direction.y = 0;
-		this.transform.LookAt (pos);
+	public void Throw(Transform pos){
+		move_direction = pos;
+		this.transform.LookAt (move_direction);
 	}
 }

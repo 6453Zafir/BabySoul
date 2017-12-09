@@ -53,6 +53,12 @@ public class UIController : MonoBehaviour {
         }
     }
 
+    public static void RecoverAllSkill()
+    {
+        GranadeLeft = 3;
+        ArrowLeft = 1;
+        BoomLeft = 1;
+    }
     public void chooseSkill(GameObject other) {
         if (isUsingSkill) {
             switch (other.name)
