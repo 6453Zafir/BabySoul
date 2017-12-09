@@ -157,6 +157,7 @@ public class Controller : MonoBehaviour
 
                 if (nearCampIdx >= CurrentCampFireIdx)
                 {
+                    CurrentCampFireIdx = nearCampIdx;
                     lastCamp.Unactivate();
                     nearCamp.Activate();
                     StopCoroutine(LightBlink);
