@@ -37,7 +37,7 @@ public class EnemyAI : MonoBehaviour {
 			}
             if (Vector3.Distance(this.transform.position, baby.transform.position) <= 3f)
             {
-                BabyAI.BabyHealth--;
+                BabyAI.BabyHealth-=10;
             }
         }
 		if (health <= 0) {
