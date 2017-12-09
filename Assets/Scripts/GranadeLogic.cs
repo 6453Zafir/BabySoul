@@ -94,6 +94,12 @@ public class GranadeLogic : MonoBehaviour {
 		if (index <= maxLength) {
 			this.transform.position = Beizer (index++, n_max);
 		}
+		if (index == 3) {
+			SoundManager.Instance.PlayOneshot (AudioClass.player.throw_match);
+		}
+		if (index == maxLength) {
+			SoundManager.Instance.PlayOneshot (AudioClass.player.drop_match);
+		}
 		if (index >= maxLength && index < maxLength + 2) {
 			Vector3 force = (target_position - start_position) / maxLength;
 			force.y = -0.3f;
@@ -109,6 +115,7 @@ public class GranadeLogic : MonoBehaviour {
 	}
 
 	public void Throw(Vector3 pos){
+		SoundManager.Instance.PlayOneshot (AudioClass.player.draw_match);
 		n_max = 4;
 		start_position = this.transform.position;
 		target_position = pos;
