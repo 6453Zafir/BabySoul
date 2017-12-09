@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GranadeLogic : MonoBehaviour {
-	enum STATE{
+/*	enum STATE{
 		Init,
 		Start,
 		Throw,
@@ -62,5 +62,10 @@ public class GranadeLogic : MonoBehaviour {
 				Destroy (hit_taget.gameObject);
 			}
 		}
+	}*/
+	void Start () {
+
 	}
+
+
 }
