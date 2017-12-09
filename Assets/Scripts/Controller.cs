@@ -89,7 +89,7 @@ public class Controller : MonoBehaviour
 				}
 				break;
 			case SKILLSELECTED.Spear:
-				if (UIController.ArrowLeft > -10) {
+				if (UIController.ArrowLeft > 0) {
 					Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 					RaycastHit raycastHit = new RaycastHit ();
 					if (Physics.Raycast (ray, out raycastHit, 10000f, 1 << 8)) {
