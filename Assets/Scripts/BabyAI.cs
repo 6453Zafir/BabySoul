@@ -17,7 +17,8 @@ public class BabyAI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Vector3.Distance (this.transform.position, target_list [index].position) <= 1.0f && index < target_list.Length - 1) {
+        transform.LookAt(Camera.main.transform.position, Vector3.up);
+        if (Vector3.Distance (this.transform.position, target_list [index].position) <= 1.0f && index < target_list.Length - 1) {
 			index++;
 			agent.SetDestination (target_list [index].position);
 		}
