@@ -10,11 +10,16 @@ public class CampFire : MonoBehaviour
         Unactivate
     }
 
-    private SpriteRenderer _spriteRenderer;
+    private SpriteRenderer _spriteRenderer
+    {
+        get
+        {
+            return GetComponentInChildren<SpriteRenderer>();
+        }
+    }
 	// Use this for initialization
 	void Start ()
 	{
-	    _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         Unactivate();
         _fireState = State.Unactivate;
 
