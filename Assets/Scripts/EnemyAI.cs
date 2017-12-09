@@ -19,7 +19,8 @@ public class EnemyAI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		afraid -= 1.0f * Time.deltaTime;
+        transform.LookAt(Camera.main.transform.position, Vector3.up);
+        afraid -= 1.0f * Time.deltaTime;
 		if (afraid >= 0f) {
 			
 		} else {
