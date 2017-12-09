@@ -21,7 +21,7 @@ public class SpearLogic : MonoBehaviour {
 	}
 
 	public void Throw(Vector3 pos){
-		move_direction = 30 * Vector3.Normalize (pos - this.transform.position);
+		move_direction = 60 * Vector3.Normalize (pos - this.transform.position);
 		move_direction.y = 0;
 		this.transform.LookAt (pos);
 	}

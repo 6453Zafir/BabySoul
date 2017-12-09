@@ -6,7 +6,7 @@ public class Controller : MonoBehaviour
 {
     public List<CampFire> CampFires = new List<CampFire>();
 
-    public int CurrentCampleFireIdx { get; private set; }
+    public int CurrentCampFireIdx { get; private set; }
 
 
 	enum SKILLSELECTED{
@@ -20,31 +20,43 @@ public class Controller : MonoBehaviour
 	SKILLSELECTED skill_selected = SKILLSELECTED.NONE;
     public float moveSpeed = 5f;
     bool isBabyMoving = false;
+	bool isDied = false;
+	int dieTime = 10;
 	// Use this for initialization
 	void Start ()
 	{
-        CurrentCampleFireIdx = 0;
-        CampFires[CurrentCampleFireIdx].Activate();
+        CurrentCampFireIdx = 0;
+        CampFires[CurrentCampFireIdx].Activate();
     }
 	
 	// Update is called once per frame
 	void Update () {
+		if (isDied) {
+			if (skill_selected == SKILLSELECTED.Suicide) {
+				Suicide ();
+			}
+		} else {
+			KeyboardListener ();
+		}
+	}
+
+	void KeyboardListener(){
 		if (Input.GetKey (KeyCode.W)) {
 			this.transform.position += new Vector3 (0, 0, moveSpeed) * Time.deltaTime;
-            isBabyMoving = true;
-        }
+			isBabyMoving = true;
+		}
 		if (Input.GetKey (KeyCode.S)) {
 			this.transform.position += new Vector3 (0, 0, -moveSpeed) * Time.deltaTime;
-            isBabyMoving = true;
-        }
+			isBabyMoving = true;
+		}
 		if (Input.GetKey (KeyCode.A)) {
 			this.transform.position += new Vector3 (-moveSpeed, 0, 0) * Time.deltaTime;
-            isBabyMoving = true;
-        }
+			isBabyMoving = true;
+		}
 		if (Input.GetKey (KeyCode.D)) {
 			this.transform.position += new Vector3 (moveSpeed, 0, 0) * Time.deltaTime;
-            isBabyMoving = true;
-        }
+			isBabyMoving = true;
+		}
 		if (Input.GetKeyDown (KeyCode.Alpha1)) {
 			skill_selected = SKILLSELECTED.Granade;
 		}
@@ -53,10 +65,11 @@ public class Controller : MonoBehaviour
 		}
 		if (Input.GetKeyDown (KeyCode.Alpha3)) {
 			skill_selected = SKILLSELECTED.Suicide;
+			isDied = true;
 		}
 
-        if (Input.GetMouseButtonDown(0))
-        {
+		if (Input.GetMouseButtonDown(0))
+		{
 			switch (skill_selected) {
 			case SKILLSELECTED.Granade:
 				if (UIController.GranadeLeft > 0) {
@@ -96,9 +109,7 @@ public class Controller : MonoBehaviour
 			default:
 				break;
 			}
-            
-        }
-
+		}
 	}
 
     void OnTriggerEnter(Collider collider)
@@ -108,7 +119,7 @@ public class Controller : MonoBehaviour
             var nearCamp = collider.gameObject.GetComponentInChildren<CampFire>();
             //nearCamp.lighton
 
-            if(nearCamp != CampFires[CurrentCampleFireIdx]) LightBlink = StartCoroutine(LightAnim(nearCamp));
+            if(nearCamp != CampFires[CurrentCampFireIdx]) LightBlink = StartCoroutine(LightAnim(nearCamp));
         }
     }
 
@@ -118,7 +129,7 @@ public class Controller : MonoBehaviour
         {
             var nearCamp = collider.gameObject.GetComponentInChildren<CampFire>();
             //nearCamp.lighton
-            if (nearCamp != CampFires[CurrentCampleFireIdx])
+            if (nearCamp != CampFires[CurrentCampFireIdx])
             {
                 StopCoroutine(LightBlink);
                 nearCamp.Light();
@@ -143,11 +154,11 @@ public class Controller : MonoBehaviour
             var nearCamp = collider.gameObject.GetComponentInChildren<CampFire>();
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                var lastCamp = CampFires[CurrentCampleFireIdx];
+                var lastCamp = CampFires[CurrentCampFireIdx];
                 
                 var nearCampIdx = CampFires.FindIndex(x=>x== nearCamp);
 
-                if (nearCampIdx >= CurrentCampleFireIdx)
+                if (nearCampIdx >= CurrentCampFireIdx)
                 {
                     lastCamp.Unactivate();
                     nearCamp.Activate();
@@ -157,4 +168,26 @@ public class Controller : MonoBehaviour
             }
         }
     }
+
+	public void Suicide(){
+		dieTime--;
+		if (dieTime <= 0) {
+			Collider[] hit_target_list = Physics.OverlapSphere (this.gameObject.transform.position, 100f, 1 << 8);
+			foreach (Collider hit_taget in hit_target_list) {
+				if (string.Equals (hit_taget.gameObject.name, "Enemy(Clone)")) {
+					Destroy (hit_taget.gameObject);
+				}
+			}
+			dieTime = 10;
+			Respawn ();
+		}
+	}
+
+	public void Respawn(){
+		UIController.GranadeLeft = 3;
+		UIController.ArrowLeft = 1;
+		UIController.BoomLeft = 1;
+		this.transform.position = CampFires [CurrentCampFireIdx].transform.position + new Vector3 (0, 0.5f, 1f);
+		isDied = false;
+	}
 }
