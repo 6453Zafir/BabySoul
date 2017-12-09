@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>
 {
     #region 单例  
