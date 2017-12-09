@@ -2050,6 +2050,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   granade_prefab: {fileID: 1698513400756482, guid: c9927456aec3442c2bbecafc8e47248b,
     type: 2}
+  spear_prefab: {fileID: 1511247496084126, guid: 786c7ea372d7741cbb45907295aad86e,
+    type: 2}
   moveSpeed: 5
 --- !u!1 &1634033244
 GameObject:

@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SpearLogic : MonoBehaviour {
-	Vector3 move_direction;
+	Vector3 move_direction = Vector3.zero;
 
 	// Use this for initialization
 	void Start () {
-		Throw (new Vector3 (1, 0, 2));
 	}
 	
 	// Update is called once per frame

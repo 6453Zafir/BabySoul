@@ -36,18 +36,17 @@ public class Controller : MonoBehaviour {
 			this.transform.position += new Vector3 (moveSpeed, 0, 0) * Time.deltaTime;
             isBabyMoving = true;
         }
-		if (Input.GetKey (KeyCode.Alpha1)) {
+		if (Input.GetKeyDown (KeyCode.Alpha1)) {
 			skill_selected = SKILLSELECTED.Granade;
 		}
-		if (Input.GetKey (KeyCode.Alpha2)) {
+		if (Input.GetKeyDown (KeyCode.Alpha2)) {
 			skill_selected = SKILLSELECTED.Spear;
 		}
-		if (Input.GetKey (KeyCode.Alpha3)) {
+		if (Input.GetKeyDown (KeyCode.Alpha3)) {
 			skill_selected = SKILLSELECTED.Suicide;
 		}
 
-
-        if (Input.GetMouseButtonDown(0) && UIController.isThrowingGa )
+        if (Input.GetMouseButtonDown(0))
         {
 			switch (skill_selected) {
 			case SKILLSELECTED.Granade:
@@ -75,9 +74,9 @@ public class Controller : MonoBehaviour {
 					{
 						Vector3 pos = raycastHit.point;
 						GameObject armo = Instantiate(spear_prefab, this.transform.position, this.transform.rotation);
-						armo.GetComponent<SpearLogic>().SendMessage("Throw", pos);
+						armo.GetComponent<SpearLogic> ().SendMessage ("Throw", pos + new Vector3 (0, 0.5f, 0));
 					}
-					UIController.GranadeLeft -= 1;
+					UIController.ArrowLeft -= 1;
 				}
 				else
 				{
