@@ -2,7 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Controller : MonoBehaviour {
+public class Controller : MonoBehaviour
+{
+    public List<CampFire> CampFires = new List<CampFire>();
+
+    public int CurrentCampleFireIdx { get; private set; }
+
+
 	enum SKILLSELECTED{
 		NONE,
 		Granade,
@@ -15,8 +21,11 @@ public class Controller : MonoBehaviour {
     public float moveSpeed = 5f;
     bool isBabyMoving = false;
 	// Use this for initialization
-	void Start () {
-	}
+	void Start ()
+	{
+        CurrentCampleFireIdx = 0;
+        CampFires[CurrentCampleFireIdx].Activate();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -91,4 +100,61 @@ public class Controller : MonoBehaviour {
         }
 
 	}
+
+    void OnTriggerEnter(Collider collider)
+    {
+        if (collider.tag == "CampFire")
+        {
+            var nearCamp = collider.gameObject.GetComponentInChildren<CampFire>();
+            //nearCamp.lighton
+
+            if(nearCamp != CampFires[CurrentCampleFireIdx]) LightBlink = StartCoroutine(LightAnim(nearCamp));
+        }
+    }
+
+    void OnTriggerExit(Collider collider)
+    {
+        if (collider.tag == "CampFire")
+        {
+            var nearCamp = collider.gameObject.GetComponentInChildren<CampFire>();
+            //nearCamp.lighton
+            if (nearCamp != CampFires[CurrentCampleFireIdx])
+            {
+                StopCoroutine(LightBlink);
+                nearCamp.Light();
+            }
+
+        }
+    }
+
+    private Coroutine LightBlink;
+    IEnumerator LightAnim(CampFire fire)
+    {
+        while (true)
+        {
+            fire.Blink();
+            yield return new WaitForEndOfFrame();
+        }
+    }
+    void OnTriggerStay(Collider collider)
+    {
+        if (collider.tag == "CampFire")
+        {
+            var nearCamp = collider.gameObject.GetComponentInChildren<CampFire>();
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                var lastCamp = CampFires[CurrentCampleFireIdx];
+                
+                var nearCampIdx = CampFires.FindIndex(x=>x== nearCamp);
+
+                if (nearCampIdx >= CurrentCampleFireIdx)
+                {
+                    lastCamp.Unactivate();
+                    nearCamp.Activate();
+                    StopCoroutine(LightBlink);
+                    UIController.RecoverAllSkill();
+                }
+            }
+        }
+    }
 }
