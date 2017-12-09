@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Controller : MonoBehaviour
 {
-    public List<CampFire> CampFires = new List<CampFire>();
+    public List<CampFire>CampFires = new List<CampFire>();
 
     public int CurrentCampFireIdx { get; private set; }
 
@@ -19,7 +19,7 @@ public class Controller : MonoBehaviour
 	public GameObject spear_prefab;
 	SKILLSELECTED skill_selected = SKILLSELECTED.NONE;
     public float moveSpeed = 5f;
-    bool isBabyMoving = false;
+    bool isFPCMoving = false;
 	bool isDied = false;
 	int dieTime = 10;
 	// Use this for initialization
@@ -27,6 +27,8 @@ public class Controller : MonoBehaviour
 	{
         CurrentCampFireIdx = 0;
         CampFires[CurrentCampFireIdx].Activate();
+        SoundManager.Instance.PlayLoop(AudioClass.environment.bird);
+        SoundManager.Instance.PlayLoop(AudioClass.environment.wind);
     }
 	
 	// Update is called once per frame
@@ -36,26 +38,34 @@ public class Controller : MonoBehaviour
 				Suicide ();
 			}
 		} else {
-			KeyboardListener ();
+            KeyboardListener ();
+            if (isFPCMoving)
+            {
+                SoundManager.Instance.PlayLoop(AudioClass.baby.footstep_normal);
+            }
+            else {
+                SoundManager.Instance.StopSound("footstep_normal");
+            }
 		}
 	}
 
 	void KeyboardListener(){
-		if (Input.GetKey (KeyCode.W)) {
+        isFPCMoving = false;
+        if (Input.GetKey (KeyCode.W)) {
 			this.transform.position += new Vector3 (0, 0, moveSpeed) * Time.deltaTime;
-			isBabyMoving = true;
+            isFPCMoving = true;
 		}
 		if (Input.GetKey (KeyCode.S)) {
 			this.transform.position += new Vector3 (0, 0, -moveSpeed) * Time.deltaTime;
-			isBabyMoving = true;
+            isFPCMoving = true;
 		}
 		if (Input.GetKey (KeyCode.A)) {
 			this.transform.position += new Vector3 (-moveSpeed, 0, 0) * Time.deltaTime;
-			isBabyMoving = true;
+            isFPCMoving = true;
 		}
 		if (Input.GetKey (KeyCode.D)) {
 			this.transform.position += new Vector3 (moveSpeed, 0, 0) * Time.deltaTime;
-			isBabyMoving = true;
+            isFPCMoving = true;
 		}
 		if (Input.GetKeyDown (KeyCode.Alpha1)) {
 			skill_selected = SKILLSELECTED.Granade;
