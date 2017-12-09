@@ -89,17 +89,14 @@ public class Controller : MonoBehaviour
 				}
 				break;
 			case SKILLSELECTED.Spear:
-				if (UIController.ArrowLeft > 0) {
-					Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-					RaycastHit raycastHit = new RaycastHit();
-					if (Physics.Raycast(ray, out raycastHit))
-					{
-						Vector3 pos = raycastHit.point;
-						pos.y = 0.5f;
-						GameObject armo = Instantiate(spear_prefab, this.transform.position, this.transform.rotation);
-						armo.GetComponent<SpearLogic> ().SendMessage ("Throw", pos);
+				if (UIController.ArrowLeft > -10) {
+					Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+					RaycastHit raycastHit = new RaycastHit ();
+					if (Physics.Raycast (ray, out raycastHit, 10000f, 1 << 8)) {
+						GameObject armo = Instantiate (spear_prefab, this.transform.position, this.transform.rotation);
+						armo.GetComponent<SpearLogic> ().SendMessage ("Throw", raycastHit.transform);
+						UIController.ArrowLeft -= 1;
 					}
-					UIController.ArrowLeft -= 1;
 				}
 				else
 				{
