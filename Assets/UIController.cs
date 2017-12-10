@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour {
     public static int GranadeLeft = 3, ArrowLeft = 1, BoomLeft = 1;
-    public GameObject GGPanel;
+    public GameObject GGPanel, finishPanel;
     public GameObject GranadePanel, ShootPanel, BoomPanel;
     public Text ThrowInfo, ShootInfo, BoomInfo;
-    public static bool isThrowingGa = false, isShooting = false, isBooming = false;
+    public static bool isThrowingGa = false, isShooting = false, isBooming = false,isFinished = false;
     public static bool isGameOver = false;
     bool isUsingSkill;
     // Use this for initialization
@@ -45,6 +45,10 @@ public class UIController : MonoBehaviour {
         ShootInfo.text = ArrowLeft.ToString();
         BoomInfo.text = BoomLeft.ToString();
 
+        if (isFinished) {
+            finishPanel.SetActive(true);
+
+        }
 
         if (BabyAI.BabyHealth<=0) {
             isGameOver = true;
@@ -109,4 +113,6 @@ public class UIController : MonoBehaviour {
 
 
     }
+
+    
 }

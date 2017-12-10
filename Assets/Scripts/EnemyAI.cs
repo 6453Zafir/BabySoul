@@ -28,7 +28,7 @@ public class EnemyAI : MonoBehaviour {
 			agent.acceleration = 2;
 			agent.angularSpeed = 60;
 			agent.SetDestination (baby.position);
-			if (Vector3.Distance (this.transform.position, player.transform.position) <= 3f) {
+			if (Vector3.Distance (this.transform.position, player.transform.position) <= 5f) {
 				GetDamaged (1);
                 float pitch = Random.Range(1f, 4f);
                 if (pitch < 2)
@@ -39,14 +39,19 @@ public class EnemyAI : MonoBehaviour {
                     SoundManager.Instance.PlayOneshot(AudioClass.ghost.ghost_afraid_2, true, pitch, 0.2f);
                 }
                 afraid = 0.8f;
-				agent.speed = 4;
+				agent.speed = 10;
 				agent.acceleration = 10;
 				agent.angularSpeed = 360;
 				agent.SetDestination (2 * this.transform.position - player.position);
 			}
             if (Vector3.Distance(this.transform.position, baby.transform.position) <= 3f)
             {
-                BabyAI.BabyHealth-=10;
+                BabyAI.BabyHealth-=5;
+                afraid = 0.2f;
+                agent.speed = 4;
+                agent.acceleration = 10;
+                agent.angularSpeed = 360;
+                agent.SetDestination(0.1f * this.transform.position - baby.position);
             }
         }
 	}
