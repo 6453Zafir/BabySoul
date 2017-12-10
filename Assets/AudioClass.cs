@@ -8,7 +8,8 @@
         bird,
         wind,
         burning,
-        boom
+        boom,
+        bgm
     }
     public enum player {
         draw_match,

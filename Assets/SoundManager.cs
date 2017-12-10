@@ -60,9 +60,12 @@ public class SoundManager : MonoSingleton<SoundManager>
         AudioSource[] audioSources = gameObject.GetComponents<AudioSource>();
         foreach (AudioSource ad in audioSources)
         {
-            if (ad.clip.name.Equals(ResourceManager.Instance.Load<AudioClip>(bgName).name))
-            {
-                isAudioSourceExsit = true;
+            if (ad.clip != null) {
+
+                if (ad.clip.name.Equals(ResourceManager.Instance.Load<AudioClip>(bgName).name))
+                {
+                    isAudioSourceExsit = true;
+                }
             }
         }
         if (!isAudioSourceExsit)
@@ -98,7 +101,6 @@ public class SoundManager : MonoSingleton<SoundManager>
                     m_bgMusic.Play();
                 }
                 m_bgMusic.loop = isLoop;
-                UnityEngine.Debug.Log("已播放");
             }
             else
             {
@@ -110,30 +112,34 @@ public class SoundManager : MonoSingleton<SoundManager>
         }
 
     }
+    /// <summary>
+    /// 手动停止循环音效
+    /// </summary>
+    /// <param name="bgClipname"></param>
     public void StopSound(string bgClipname)
     {
         AudioSource[] audioSources = gameObject.GetComponents<AudioSource>();
         foreach (AudioSource ad in audioSources)
         {
-            if (ad.clip.name.Equals(bgClipname) && ad.isPlaying)
-            {
-                UnityEngine.Debug.Log("已暂停");
-                Destroy(ad);
-
+            if (ad.clip != null) {
+                if (ad.clip.name.Equals(bgClipname) && ad.isPlaying)
+                {
+                    Destroy(ad);
+                }
             }
         }
     }
+    
+
     //播放各种音频剪辑的调用方法，AudioClass是提前写好的存放各种音乐名称的枚举类，便于外面直接调用  
     public void PlayLoop(AudioClass.environment bgName, bool restart = false)
     {
         PlayLoopSound(bgName, restart);
     }
-
     public void PlayLoop(AudioClass.player bgName, bool restart = false)
     {
         PlayLoopSound(bgName, restart);
     }
-
     public void PlayLoop(AudioClass.baby bgName, bool restart = false)
     {
         PlayLoopSound(bgName, restart);
@@ -168,8 +174,6 @@ public class SoundManager : MonoSingleton<SoundManager>
         //否则，就是clip不为空的话，如果defAudio=true，直接播放  
         if (defAudio)
         {
-
-            print(clip.length);
             //PlayOneShot (音频剪辑, 音量大小)  
 
             if (!m_effectMusic.isPlaying)

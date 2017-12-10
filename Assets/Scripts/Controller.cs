@@ -28,7 +28,7 @@ public class Controller : MonoBehaviour
         CurrentCampFireIdx = 0;
         CampFires[CurrentCampFireIdx].Activate();
         SoundManager.Instance.PlayLoop(AudioClass.environment.bird);
-        SoundManager.Instance.PlayLoop(AudioClass.environment.wind);
+        SoundManager.Instance.PlayLoop(AudioClass.environment.bgm);
     }
 	
 	// Update is called once per frame
@@ -69,16 +69,32 @@ public class Controller : MonoBehaviour
 		}
 		if (Input.GetKeyDown (KeyCode.Alpha1)) {
 			skill_selected = SKILLSELECTED.Granade;
-		}
+            UIController.isThrowingGa = true;
+            UIController.isShooting = false;
+            UIController.isBooming = false;
+        }
 		if (Input.GetKeyDown (KeyCode.Alpha2)) {
 			skill_selected = SKILLSELECTED.Spear;
-		}
+
+            UIController.isThrowingGa = false;
+            UIController.isShooting = true;
+            UIController.isBooming = false;
+        }
 		if (Input.GetKeyDown (KeyCode.Alpha3)) {
 			skill_selected = SKILLSELECTED.Suicide;
+            UIController.isThrowingGa = false;
+            UIController.isShooting = false;
+            UIController.isBooming = true;
 			isDied = true;
 		}
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            UIController.isThrowingGa = false;
+            UIController.isShooting = false;
+            UIController.isBooming = false;
+        }
 
-		if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
 		{
 			switch (skill_selected) {
 			case SKILLSELECTED.Granade:

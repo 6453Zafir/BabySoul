@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour {
     public static int GranadeLeft = 3, ArrowLeft = 1, BoomLeft = 1;
     public GameObject GGPanel;
+    public GameObject GranadePanel, ShootPanel, BoomPanel;
     public Text ThrowInfo, ShootInfo, BoomInfo;
     public static bool isThrowingGa = false, isShooting = false, isBooming = false;
     public static bool isGameOver = false;
@@ -18,28 +19,27 @@ public class UIController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (Input.GetKeyDown("1"))
-        {
-            isBooming = false;
-            isShooting = false;
-            isThrowingGa = true;
+
+        if (isThrowingGa&&GranadeLeft>0) {
+            GranadePanel.GetComponent<Image>().color = new Color(255, 255, 255, 1); 
         }
-        if (Input.GetKeyDown("2")) {
-            isThrowingGa = false;
-            isBooming = false;
-            isShooting = true;
-        }
-        if (Input.GetKeyDown("3"))
+        else
         {
-            isThrowingGa = false;
-            isShooting = false;
-            isBooming = true;
+            GranadePanel.GetComponent<Image>().color = new Color(255, 255, 255, 0.3f);
         }
-        if (Input.GetKeyDown("q"))
+        if (isShooting&&ArrowLeft>0)
         {
-            isThrowingGa = false;
-            isShooting = false;
-            isBooming = false;
+            ShootPanel.GetComponent<Image>().color = new Color(255, 255, 255, 1);
+        }
+        else {
+            ShootPanel.GetComponent<Image>().color = new Color(255, 255, 255, 0.3f);
+        }
+        if (isBooming&&BoomLeft>0)
+        {
+            BoomPanel.GetComponent<Image>().color = new Color(255, 255, 255, 1);
+        }
+        else {
+            BoomPanel.GetComponent<Image>().color = new Color(255, 255, 255, 0.3f);
         }
         ThrowInfo.text = GranadeLeft.ToString();
         ShootInfo.text = ArrowLeft.ToString();
