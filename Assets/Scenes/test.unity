@@ -154,6 +154,7 @@ MonoBehaviour:
   - {fileID: 847345676}
   - {fileID: 1134506180}
   - {fileID: 813001185}
+  player: {fileID: 270042251}
 --- !u!195 &32381904
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -508,6 +509,11 @@ Transform:
   m_Father: {fileID: 153123564}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &270042251 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1460135773108676, guid: b4c74efe711ad9540a22e12bee83ed60,
+    type: 2}
+  m_PrefabInternal: {fileID: 1699313614}
 --- !u!1 &302528029
 GameObject:
   m_ObjectHideFlags: 0
@@ -1076,11 +1082,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4228924650886572, guid: f8fd2f8c54f925643a0609e4b5eea396, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4228924650886572, guid: f8fd2f8c54f925643a0609e4b5eea396, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f8fd2f8c54f925643a0609e4b5eea396, type: 2}
@@ -2610,7 +2616,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1386269168
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4362,6 +4368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GGPanel: {fileID: 1461130089}
+  finishPanel: {fileID: 1106107991}
   GranadePanel: {fileID: 375043748}
   ShootPanel: {fileID: 1230710000}
   BoomPanel: {fileID: 714954679}
