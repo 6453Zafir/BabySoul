@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4552385158039900}
   - component: {fileID: 198786571464896610}
   - component: {fileID: 199732216925184368}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 198165863192257336}
   - component: {fileID: 199895525939613842}
   - component: {fileID: 114068693006657032}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: FireBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 124946190729110230}
   - component: {fileID: 81740240142589534}
   - component: {fileID: 114611880392822084}
+  - component: {fileID: 114612197683966624}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -197,7 +198,7 @@ GameObject:
   - component: {fileID: 4464464877976042}
   - component: {fileID: 198708977618828992}
   - component: {fileID: 199959353044770578}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: FireFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,7 +231,7 @@ GameObject:
   - component: {fileID: 4641838408434770}
   - component: {fileID: 95997211829766592}
   - component: {fileID: 212414474583164080}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,7 +267,7 @@ GameObject:
   - component: {fileID: 198777273989168230}
   - component: {fileID: 199733904448183212}
   - component: {fileID: 114564088223230798}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: 2D_FireMagic_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -636,7 +637,7 @@ Light:
   serializedVersion: 8
   m_Type: 0
   m_Color: {r: 1, g: 0.51724136, b: 0, a: 1}
-  m_Intensity: 39.23
+  m_Intensity: 36.66
   m_Range: 4.52
   m_SpotAngle: 87.9
   m_CookieSize: 10
@@ -708,7 +709,7 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 1, g: 0.59999996, b: 0, a: 1}
-  m_Intensity: 14.02
+  m_Intensity: 10
   m_Range: 22.6
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -785,6 +786,23 @@ MonoBehaviour:
     type: 2}
   enemy_prefab: {fileID: 1593027706403976, guid: 6041c8c424fba43f3bb1b2f14331195a,
     type: 2}
+  enemy_prefab_2: {fileID: 1110033381708676, guid: 4e5149acc097dc445a98d8580ae08051,
+    type: 2}
+--- !u!114 &114612197683966624
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1453479953887892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be3f0e8d876118642b5b45f5bb58f490, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blendMode: 4
+  intensity: 1
+  texture: {fileID: 2800000, guid: 20e018cf6fd00cf448dd91f9c5071faf, type: 3}
+  overlayShader: {fileID: 4800000, guid: c45da736d21fff040b0864a97a35ac88, type: 3}
 --- !u!114 &114897152515308860
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -814,7 +832,7 @@ MonoBehaviour:
   - {fileID: 0}
   granade_prefab: {fileID: 1698513400756482, guid: c9927456aec3442c2bbecafc8e47248b,
     type: 2}
-  spear_prefab: {fileID: 1511247496084126, guid: 786c7ea372d7741cbb45907295aad86e,
+  spear_prefab: {fileID: 1818118109956862, guid: 5cbcfd22478624af6956e219a7af474a,
     type: 2}
   moveSpeed: 5
   PlayerAnimator: {fileID: 95997211829766592}

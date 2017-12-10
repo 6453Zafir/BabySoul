@@ -15,6 +15,7 @@ public class ClickAndAdd : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        
 		time -= 1.0f * Time.deltaTime;
 		if (time <= 0f) {
 			time = 3.0f;
