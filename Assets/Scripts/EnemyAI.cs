@@ -7,7 +7,7 @@ public class EnemyAI : MonoBehaviour {
 	public Transform baby;
 	public Transform player;
 	float afraid = -1.0f;
-	int health = 3;
+	public int health = 3;
 	NavMeshAgent agent;
 
 	// Use this for initialization
@@ -29,8 +29,16 @@ public class EnemyAI : MonoBehaviour {
 			agent.angularSpeed = 60;
 			agent.SetDestination (baby.position);
 			if (Vector3.Distance (this.transform.position, player.transform.position) <= 3f) {
-				health--;
-				afraid = 0.8f;
+				GetDamaged (1);
+                float pitch = Random.Range(1f, 4f);
+                if (pitch < 2)
+                {
+                    SoundManager.Instance.PlayOneshot(AudioClass.ghost.ghost_afraid, true, pitch, 0.2f);
+                }
+                else {
+                    SoundManager.Instance.PlayOneshot(AudioClass.ghost.ghost_afraid_2, true, pitch, 0.2f);
+                }
+                afraid = 0.8f;
 				agent.speed = 4;
 				agent.acceleration = 10;
 				agent.angularSpeed = 360;
@@ -41,8 +49,18 @@ public class EnemyAI : MonoBehaviour {
                 BabyAI.BabyHealth-=10;
             }
         }
+	}
+
+	public void GetDamaged(int damage){
+		health -= damage;
 		if (health <= 0) {
-			Destroy (this.gameObject);
+			Die ();
 		}
+	}
+
+	void Die(){
+		float pitch = Random.Range(0.1f, 2f);
+		SoundManager.Instance.PlayOneshot (AudioClass.ghost.ghost_die,true, pitch,pitch);
+		Destroy (this.gameObject);
 	}
 }

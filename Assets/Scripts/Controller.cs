@@ -28,7 +28,7 @@ public class Controller : MonoBehaviour
         CurrentCampFireIdx = 0;
         CampFires[CurrentCampFireIdx].Activate();
         SoundManager.Instance.PlayLoop(AudioClass.environment.bird);
-        SoundManager.Instance.PlayLoop(AudioClass.environment.wind);
+        SoundManager.Instance.PlayLoop(AudioClass.environment.bgm);
     }
 	
 	// Update is called once per frame
@@ -94,21 +94,38 @@ public class Controller : MonoBehaviour
 		}
 		if (Input.GetKeyDown (KeyCode.Alpha1)) {
 			skill_selected = SKILLSELECTED.Granade;
+
+            UIController.isThrowingGa = true;
+            UIController.isShooting = false;
+            UIController.isBooming = false;
             PlayerAnimator.SetTrigger(AnimState.Granade.ToString());
+
         }
-        if (Input.GetKeyDown (KeyCode.Alpha2)) {
+		if (Input.GetKeyDown (KeyCode.Alpha2)) {
 			skill_selected = SKILLSELECTED.Spear;
             PlayerAnimator.SetTrigger(AnimState.Throw.ToString());
 
+            UIController.isThrowingGa = false;
+            UIController.isShooting = true;
+            UIController.isBooming = false;
         }
-        if (Input.GetKeyDown (KeyCode.Alpha3)) {
+		if (Input.GetKeyDown (KeyCode.Alpha3)) {
 			skill_selected = SKILLSELECTED.Suicide;
+            UIController.isThrowingGa = false;
+            UIController.isShooting = false;
+            UIController.isBooming = true;
+			isDied = true;
             PlayerAnimator.SetTrigger(AnimState.Boom.ToString());
-
-            isDied = true;
+        
 		}
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            UIController.isThrowingGa = false;
+            UIController.isShooting = false;
+            UIController.isBooming = false;
+        }
 
-		if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
 		{
 			switch (skill_selected) {
 			case SKILLSELECTED.Granade:
@@ -129,7 +146,7 @@ public class Controller : MonoBehaviour
 				}
 				break;
 			case SKILLSELECTED.Spear:
-				if (UIController.ArrowLeft > -10) {
+				if (UIController.ArrowLeft > 0) {
 					Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 					RaycastHit raycastHit = new RaycastHit ();
 					if (Physics.Raycast (ray, out raycastHit, 10000f, 1 << 8)) {

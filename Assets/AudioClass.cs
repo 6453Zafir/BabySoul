@@ -8,7 +8,8 @@
         bird,
         wind,
         burning,
-        boom
+        boom,
+        bgm
     }
     public enum player {
         draw_match,
@@ -16,5 +17,12 @@
         throw_match,
         shoot,
         bingo
+    }
+    public enum ghost {
+        ghost_born,
+        ghost_attack,
+        ghost_die,
+        ghost_afraid,
+        ghost_afraid_2
     }
 }

@@ -322,20 +322,6 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_FalloffTable:
-    m_Table[0]: 0
-    m_Table[1]: 0
-    m_Table[2]: 0
-    m_Table[3]: 0
-    m_Table[4]: 0
-    m_Table[5]: 0
-    m_Table[6]: 0
-    m_Table[7]: 0
-    m_Table[8]: 0
-    m_Table[9]: 0
-    m_Table[10]: 0
-    m_Table[11]: 0
-    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -429,7 +415,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4923066705026864, guid: ec4736a080f479443b29d7f0430d6b84, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.21
       objectReference: {fileID: 0}
     - target: {fileID: 4923066705026864, guid: ec4736a080f479443b29d7f0430d6b84, type: 2}
       propertyPath: m_LocalPosition.z
@@ -453,7 +439,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4923066705026864, guid: ec4736a080f479443b29d7f0430d6b84, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 198926424156700928, guid: ec4736a080f479443b29d7f0430d6b84,
         type: 2}
@@ -1111,6 +1097,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4160682029361432, guid: f8fd2f8c54f925643a0609e4b5eea396, type: 2}
       propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4228924650886572, guid: f8fd2f8c54f925643a0609e4b5eea396, type: 2}
+      propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4228924650886572, guid: f8fd2f8c54f925643a0609e4b5eea396, type: 2}
@@ -1168,20 +1158,6 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_FalloffTable:
-    m_Table[0]: 0
-    m_Table[1]: 0
-    m_Table[2]: 0
-    m_Table[3]: 0
-    m_Table[4]: 0
-    m_Table[5]: 0
-    m_Table[6]: 0
-    m_Table[7]: 0
-    m_Table[8]: 0
-    m_Table[9]: 0
-    m_Table[10]: 0
-    m_Table[11]: 0
-    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -3859,6 +3835,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GGPanel: {fileID: 1461130089}
+  GranadePanel: {fileID: 375043748}
+  ShootPanel: {fileID: 1230710000}
+  BoomPanel: {fileID: 714954679}
   ThrowInfo: {fileID: 641268460}
   ShootInfo: {fileID: 1121850874}
   BoomInfo: {fileID: 1921768974}
