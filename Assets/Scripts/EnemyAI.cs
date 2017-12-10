@@ -42,6 +42,7 @@ public class EnemyAI : MonoBehaviour {
             }
         }
 		if (health <= 0) {
+			SoundManager.Instance.PlayOneshot (AudioClass.ghost.ghost_die);
 			Destroy (this.gameObject);
 		}
 	}
