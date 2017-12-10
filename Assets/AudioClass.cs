@@ -17,4 +17,9 @@
         shoot,
         bingo
     }
+    public enum ghost {
+        ghost_born,
+        ghost_attack,
+        ghost_die
+    }
 }

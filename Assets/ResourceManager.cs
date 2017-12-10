@@ -35,6 +35,11 @@ public class ResourceManager : Singleton<ResourceManager>
                     filePath = "Audios/baby/" + enumName.ToString();
                     break;
                 }
+            case "ghost":
+                {
+                    filePath = "Audios/ghost/" + enumName.ToString();
+                    break;
+                }
             default:
                 {
                     break;

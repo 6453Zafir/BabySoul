@@ -138,7 +138,10 @@ public class SoundManager : MonoSingleton<SoundManager>
     {
         PlayLoopSound(bgName, restart);
     }
-
+    public void PlayLoop(AudioClass.ghost bgName, bool restart = false)
+    {
+        PlayLoopSound(bgName, restart);
+    }
 
     // 播放音效  
     private void PlayOneshotSound(object effectName, bool defAudio = true, float volume = 1f)
@@ -191,7 +194,10 @@ public class SoundManager : MonoSingleton<SoundManager>
     {
         PlayOneshotSound(effectName, defAudio, volume);
     }
-
+    public void PlayOneshot(AudioClass.ghost effectName, bool defAudio = true, float volume = 1f)
+    {
+        PlayOneshotSound(effectName, defAudio, volume);
+    }
 
     IEnumerator destoryClipAfterPlayed(float waittime, AudioSource ad)
     {
