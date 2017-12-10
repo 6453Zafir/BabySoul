@@ -32,13 +32,13 @@ public class SpearLogic : MonoBehaviour {
 			}
 		} else {
 			this.transform.position += (move_direction.position - this.transform.position) * 10f * Time.deltaTime;
-			this.transform.LookAt (move_direction);
+			//this.transform.LookAt (move_direction);
 		}
 	}
 
 	public void Throw(Transform pos){
 		SoundManager.Instance.PlayOneshot (AudioClass.player.shoot);
 		move_direction = pos;
-		this.transform.LookAt (move_direction);
+		//this.transform.LookAt (move_direction);
 	}
 }

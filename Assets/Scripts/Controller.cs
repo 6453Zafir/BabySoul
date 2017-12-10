@@ -21,7 +21,7 @@ public class Controller : MonoBehaviour
     public float moveSpeed = 5f;
     bool isFPCMoving = false;
 	bool isDied = false;
-	int dieTime = 10;
+	int dieTime = 61;
 	int throwTime = -1;
 	Vector3 draw_target;
 	int drawTime = -1;
@@ -131,6 +131,7 @@ public class Controller : MonoBehaviour
             UIController.isShooting = false;
             UIController.isBooming = true;
 			isDied = true;
+			TurnSide(false);
             PlayerAnimator.SetTrigger(AnimState.Boom.ToString());
         
 		}
@@ -185,13 +186,11 @@ public class Controller : MonoBehaviour
 	    {
             PlayerAnimator.SetTrigger(AnimState.Walk.ToString());
             PlayerAnimator.SetBool("With", IsWithArrow);
-	        Debug.Log("Walk");
 	    }
 	    if(!isFPCMoving && (_lastIsFpcMoving == true))
 	    {
             PlayerAnimator.SetTrigger(AnimState.Stop.ToString());
             PlayerAnimator.SetBool("With", IsWithArrow);
-            Debug.Log("Stop");
 
         }
         _lastIsFpcMoving = isFPCMoving;
@@ -261,9 +260,7 @@ public class Controller : MonoBehaviour
 		if (dieTime <= 0) {
 			Collider[] hit_target_list = Physics.OverlapSphere (this.gameObject.transform.position, 100f, 1 << 8);
 			foreach (Collider hit_taget in hit_target_list) {
-				if (string.Equals (hit_taget.gameObject.name, "Enemy(Clone)")) {
-					Destroy (hit_taget.gameObject);
-				}
+				Destroy (hit_taget.gameObject);
 			}
 			dieTime = 61;
 			Respawn ();
@@ -276,5 +273,7 @@ public class Controller : MonoBehaviour
 		UIController.BoomLeft = 1;
 		this.transform.position = CampFires [CurrentCampFireIdx].transform.position + new Vector3 (0, 0.5f, 1f);
 		isDied = false;
+		PlayerAnimator.SetTrigger(AnimState.Stop.ToString());
+		PlayerAnimator.SetBool("With", IsWithArrow);
 	}
 }
