@@ -2848,6 +2848,47 @@ Prefab:
       propertyPath: CampFires.Array.data[2]
       value: 
       objectReference: {fileID: 426025169}
+    - target: {fileID: 114611880392822084, guid: b4c74efe711ad9540a22e12bee83ed60,
+        type: 2}
+      propertyPath: enemy_prefab_2
+      value: 
+      objectReference: {fileID: 1110033381708676, guid: 4e5149acc097dc445a98d8580ae08051,
+        type: 2}
+    - target: {fileID: 108142326879067458, guid: b4c74efe711ad9540a22e12bee83ed60,
+        type: 2}
+      propertyPath: m_CullingMask.m_Bits
+      value: 4294966783
+      objectReference: {fileID: 0}
+    - target: {fileID: 1365568561736962, guid: b4c74efe711ad9540a22e12bee83ed60, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710275241619324, guid: b4c74efe711ad9540a22e12bee83ed60, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1916044341689524, guid: b4c74efe711ad9540a22e12bee83ed60, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1209804225988046, guid: b4c74efe711ad9540a22e12bee83ed60, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532005727282592, guid: b4c74efe711ad9540a22e12bee83ed60, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 108142326879067458, guid: b4c74efe711ad9540a22e12bee83ed60,
+        type: 2}
+      propertyPath: m_Intensity
+      value: 36.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 108399337219758778, guid: b4c74efe711ad9540a22e12bee83ed60,
+        type: 2}
+      propertyPath: m_Intensity
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b4c74efe711ad9540a22e12bee83ed60, type: 2}
   m_IsPrefabParent: 0
@@ -3182,7 +3223,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1782003481
 Transform:
   m_ObjectHideFlags: 0
@@ -3193,8 +3234,8 @@ Transform:
   m_LocalPosition: {x: -13.694418, y: -0.17, z: 0.08465767}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1246677515}
   - {fileID: 1931944916}
+  - {fileID: 1246677515}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3359,6 +3400,26 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1819497878}
+--- !u!1 &1894913860 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1453479953887892, guid: b4c74efe711ad9540a22e12bee83ed60,
+    type: 2}
+  m_PrefabInternal: {fileID: 1699313614}
+--- !u!114 &1894913866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1894913860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be3f0e8d876118642b5b45f5bb58f490, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blendMode: 4
+  intensity: 1
+  texture: {fileID: 2800000, guid: 20e018cf6fd00cf448dd91f9c5071faf, type: 3}
+  overlayShader: {fileID: 4800000, guid: c45da736d21fff040b0864a97a35ac88, type: 3}
 --- !u!1 &1921768973
 GameObject:
   m_ObjectHideFlags: 0
