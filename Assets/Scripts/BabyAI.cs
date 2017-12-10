@@ -17,6 +17,9 @@ public class BabyAI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (transform.position.x < -3) {
+            UIController.isFinished = true;
+        }
         transform.LookAt(Camera.main.transform.position, Vector3.up);
         BabyHealth += 2;
         if (Vector3.Distance (this.transform.position, target_list [index].position) <= 1.0f && index < target_list.Length - 1) {

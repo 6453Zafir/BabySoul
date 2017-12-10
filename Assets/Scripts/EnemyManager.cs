@@ -29,7 +29,8 @@ public class EnemyManager : MonoBehaviour {
 		if (index >= EnemySpawnPoint.Length) {
 			return;
 		}
-		if (Mathf.Abs (EnemySpawnPoint [index].position.x - baby.transform.position.x) < 2.0f) {
+        
+		if (Mathf.Abs (EnemySpawnPoint [index].position.x - baby.transform.position.x) < 10.0f) {
 			Vector3 rand_pos = EnemySpawnPoint [index].position;
 			float pitch = Random.Range (0.2f, 3f);
 			if (pitch >= 1.2f) {
