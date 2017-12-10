@@ -6,8 +6,8 @@ using UnityEngine.AI;
 public class ClickAndAdd : MonoBehaviour {
 	public GameObject obstacle_prefab;
 	public GameObject enemy_prefab;
-
-	float time = 3.0f;
+    public GameObject enemy_prefab_2;
+    float time = 3.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -21,8 +21,15 @@ public class ClickAndAdd : MonoBehaviour {
 			Vector3 rand_pos = new Vector3 (Random.Range (-10f, 10f), 0f, Random.Range (-10f, 10f));
 			/*Instantiate (obstacle_prefab, rand_pos, new Quaternion (0, 0, 0, 0));
 			rand_pos = new Vector3 (Random.Range (-10f, 10f), 0f, Random.Range (-10f, 10f));*/
-			Instantiate (enemy_prefab, rand_pos, new Quaternion (0, 0, 0, 0));
+			
             float pitch = Random.Range(0.2f, 3f);
+            if (pitch >= 1.2f)
+            {
+                Instantiate(enemy_prefab, rand_pos, new Quaternion(0, 0, 0, 0));
+            }
+            else {
+                Instantiate(enemy_prefab_2, rand_pos, new Quaternion(0, 0, 0, 0));
+            }
             SoundManager.Instance.PlayOneshot(AudioClass.ghost.ghost_born, true,pitch,0.3f);
 		}
 	}
