@@ -7,7 +7,7 @@ public class EnemyAI : MonoBehaviour {
 	public Transform baby;
 	public Transform player;
 	float afraid = -1.0f;
-	int health = 3;
+	public int health = 3;
 	NavMeshAgent agent;
 
 	// Use this for initialization
