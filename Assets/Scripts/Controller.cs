@@ -22,6 +22,10 @@ public class Controller : MonoBehaviour
     bool isFPCMoving = false;
 	bool isDied = false;
 	int dieTime = 10;
+	int throwTime = -1;
+	Vector3 draw_target;
+	int drawTime = -1;
+	Transform throw_target;
 	// Use this for initialization
 	void Start ()
 	{
@@ -46,6 +50,20 @@ public class Controller : MonoBehaviour
             else {
                 SoundManager.Instance.StopSound("footstep_normal");
             }
+		}
+		if (drawTime > 0) {
+			drawTime--;
+		} else if (drawTime == 0) {
+			GameObject armo = Instantiate(granade_prefab, this.transform.position, this.transform.rotation);
+			armo.GetComponent<GranadeLogic>().SendMessage("Throw", draw_target);
+			drawTime--;
+		}
+		if (throwTime > 0) {
+			throwTime--;
+		} else if (throwTime == 0) {
+			GameObject armo = Instantiate (spear_prefab, this.transform.position, this.transform.rotation);
+			armo.GetComponent<SpearLogic> ().SendMessage ("Throw", throw_target);
+			throwTime--;
 		}
 	}
 
@@ -98,12 +116,10 @@ public class Controller : MonoBehaviour
             UIController.isThrowingGa = true;
             UIController.isShooting = false;
             UIController.isBooming = false;
-            PlayerAnimator.SetTrigger(AnimState.Granade.ToString());
 
         }
 		if (Input.GetKeyDown (KeyCode.Alpha2)) {
 			skill_selected = SKILLSELECTED.Spear;
-            PlayerAnimator.SetTrigger(AnimState.Throw.ToString());
 
             UIController.isThrowingGa = false;
             UIController.isShooting = true;
@@ -134,9 +150,9 @@ public class Controller : MonoBehaviour
 					RaycastHit raycastHit = new RaycastHit();
 					if (Physics.Raycast(ray, out raycastHit))
 					{
-						Vector3 pos = raycastHit.point;
-						GameObject armo = Instantiate(granade_prefab, this.transform.position, this.transform.rotation);
-						armo.GetComponent<GranadeLogic>().SendMessage("Throw", pos);
+						draw_target = raycastHit.point;
+						drawTime = 7;
+						PlayerAnimator.SetTrigger(AnimState.Granade.ToString());
 					}
 					UIController.GranadeLeft -= 1;
 				}
@@ -150,8 +166,9 @@ public class Controller : MonoBehaviour
 					Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 					RaycastHit raycastHit = new RaycastHit ();
 					if (Physics.Raycast (ray, out raycastHit, 10000f, 1 << 8)) {
-						GameObject armo = Instantiate (spear_prefab, this.transform.position, this.transform.rotation);
-						armo.GetComponent<SpearLogic> ().SendMessage ("Throw", raycastHit.transform);
+						throw_target = raycastHit.transform;
+						throwTime = 15;
+						PlayerAnimator.SetTrigger(AnimState.Throw.ToString());
 						UIController.ArrowLeft -= 1;
 					}
 				}
@@ -248,7 +265,7 @@ public class Controller : MonoBehaviour
 					Destroy (hit_taget.gameObject);
 				}
 			}
-			dieTime = 10;
+			dieTime = 61;
 			Respawn ();
 		}
 	}
