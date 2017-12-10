@@ -31,6 +31,7 @@ public class Controller : MonoBehaviour
 	{
         CurrentCampFireIdx = 0;
         CampFires[CurrentCampFireIdx].Activate();
+        CampFires.GetRange(1, CampFires.Count-1).ForEach(x=>x.Unactivate());
         SoundManager.Instance.PlayLoop(AudioClass.environment.bird);
         SoundManager.Instance.PlayLoop(AudioClass.environment.bgm);
     }
