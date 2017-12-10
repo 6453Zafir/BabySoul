@@ -30,7 +30,15 @@ public class EnemyAI : MonoBehaviour {
 			agent.SetDestination (baby.position);
 			if (Vector3.Distance (this.transform.position, player.transform.position) <= 3f) {
 				health--;
-				afraid = 0.8f;
+                float pitch = Random.Range(1f, 4f);
+                if (pitch < 2)
+                {
+                    SoundManager.Instance.PlayOneshot(AudioClass.ghost.ghost_afraid, true, pitch, 0.2f);
+                }
+                else {
+                    SoundManager.Instance.PlayOneshot(AudioClass.ghost.ghost_afraid_2, true, pitch, 0.2f);
+                }
+                afraid = 0.8f;
 				agent.speed = 4;
 				agent.acceleration = 10;
 				agent.angularSpeed = 360;
@@ -42,7 +50,8 @@ public class EnemyAI : MonoBehaviour {
             }
         }
 		if (health <= 0) {
-			SoundManager.Instance.PlayOneshot (AudioClass.ghost.ghost_die);
+            float pitch = Random.Range(0.1f, 2f);
+			SoundManager.Instance.PlayOneshot (AudioClass.ghost.ghost_die,true, pitch,pitch);
 			Destroy (this.gameObject);
 		}
 	}

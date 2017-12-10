@@ -22,6 +22,8 @@ public class ClickAndAdd : MonoBehaviour {
 			/*Instantiate (obstacle_prefab, rand_pos, new Quaternion (0, 0, 0, 0));
 			rand_pos = new Vector3 (Random.Range (-10f, 10f), 0f, Random.Range (-10f, 10f));*/
 			Instantiate (enemy_prefab, rand_pos, new Quaternion (0, 0, 0, 0));
+            float pitch = Random.Range(0.2f, 3f);
+            SoundManager.Instance.PlayOneshot(AudioClass.ghost.ghost_born, true,pitch,0.3f);
 		}
 	}
 }

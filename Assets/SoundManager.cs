@@ -144,7 +144,14 @@ public class SoundManager : MonoSingleton<SoundManager>
     }
 
     // 播放音效  
-    private void PlayOneshotSound(object effectName, bool defAudio = true, float volume = 1f)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="effectName">音效名</param>
+    /// <param name="defAudio">是否从头播放</param>
+    /// <param name="pitch">音调（最好0到3之间）</param>
+    /// <param name="volume">音量</param>
+    private void PlayOneshotSound(object effectName, bool defAudio = true, float pitch = 1f,float volume =1f)
     {
         AudioSource m_effectMusic;
         m_effectMusic = gameObject.AddComponent<AudioSource>();
@@ -167,36 +174,37 @@ public class SoundManager : MonoSingleton<SoundManager>
 
             if (!m_effectMusic.isPlaying)
             {
+                m_effectMusic.pitch = pitch;
                 m_effectMusic.PlayOneShot(clip, volume);
             }
         }
         else
         {
             //指定点播放  
-            AudioSource.PlayClipAtPoint(clip, Camera.main.transform.position, volume);
+            AudioSource.PlayClipAtPoint(clip, Camera.main.transform.position, 1);
         }
         StartCoroutine(destoryClipAfterPlayed(clip.length, m_effectMusic));
 
     }
 
     //播放各种音频剪辑的调用方法，AudioClass是提前写好的存放各种音乐名称的枚举类，便于外面直接调用  
-    public void PlayOneshot(AudioClass.environment effectName, bool defAudio = true, float volume = 1f)
+    public void PlayOneshot(AudioClass.environment effectName, bool defAudio = true, float pitch = 1f,float volume = 1f)
     {
-        PlayOneshotSound(effectName, defAudio, volume);
+        PlayOneshotSound(effectName, defAudio, pitch, volume);
     }
 
-    public void PlayOneshot(AudioClass.player effectName, bool defAudio = true, float volume = 1f)
+    public void PlayOneshot(AudioClass.player effectName, bool defAudio = true, float pitch = 1f, float volume = 1f)
     {
-        PlayOneshotSound(effectName, defAudio, volume);
+        PlayOneshotSound(effectName, defAudio, pitch, volume);
     }
 
-    public void PlayOneshot(AudioClass.baby effectName, bool defAudio = true, float volume = 1f)
+    public void PlayOneshot(AudioClass.baby effectName, bool defAudio = true, float pitch = 1f, float volume = 1f)
     {
-        PlayOneshotSound(effectName, defAudio, volume);
+        PlayOneshotSound(effectName, defAudio, pitch, volume);
     }
-    public void PlayOneshot(AudioClass.ghost effectName, bool defAudio = true, float volume = 1f)
+    public void PlayOneshot(AudioClass.ghost effectName, bool defAudio = true, float pitch = 1f, float volume = 1f)
     {
-        PlayOneshotSound(effectName, defAudio, volume);
+        PlayOneshotSound(effectName, defAudio, pitch,volume);
     }
 
     IEnumerator destoryClipAfterPlayed(float waittime, AudioSource ad)
