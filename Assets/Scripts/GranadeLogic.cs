@@ -101,8 +101,8 @@ public class GranadeLogic : MonoBehaviour {
 			SoundManager.Instance.PlayOneshot (AudioClass.player.drop_match);
 		}
 		if (index >= maxLength && index < maxLength + 2) {
-			Vector3 force = (target_position - start_position) / maxLength;
-			force.y = -0.3f;
+			Vector3 force = (target_position - start_position) / maxLength / 1.6f;
+			force.y = -0.2f;
 			this.GetComponent<Rigidbody> ().AddForce (force,ForceMode.Impulse);
 			index++;
 		}
@@ -119,6 +119,7 @@ public class GranadeLogic : MonoBehaviour {
 		n_max = 4;
 		start_position = this.transform.position;
 		target_position = pos;
+		target_position = start_position / 3 + target_position * 2 / 3;
 		target_position.y = 0.1f;
 		float distance = Vector3.Distance (start_position, target_position);
 		half_position = new Vector3[n_max];
@@ -126,12 +127,12 @@ public class GranadeLogic : MonoBehaviour {
 		half_position [n_max - 1] = target_position;
 
 		half_position [1] = (start_position + target_position) / 2;
-		half_position [1].y += distance * 0.4f;
+		half_position [1].y += distance * 0.3f;
 		half_position [2] = start_position / 3 + target_position * 2 / 3;
-		half_position [2].y += distance * 0.4f;
+		half_position [2].y += distance * 0.3f;
 
-		maxLength = (int)(distance * 2);
-		explosion_time = 57;
+		maxLength = (int)(distance * 1.5);
+		explosion_time = 43;
 		index = 0;
 	}
 
@@ -139,11 +140,9 @@ public class GranadeLogic : MonoBehaviour {
 		GameObject explosion = Instantiate (explosion_prefab, this.transform);
 		Renderer renderer = explosion.GetComponent<Renderer> ();
 		renderer.material.color = new Color (0.5f, 0f, 0f, 0.1f);
-		Collider[] hit_target_list = Physics.OverlapSphere (this.gameObject.transform.position, 4f);
+		Collider[] hit_target_list = Physics.OverlapSphere (this.gameObject.transform.position, 6f, 1 << 8);
 		foreach (Collider hit_taget in hit_target_list) {
-			if (string.Equals (hit_taget.gameObject.name, "Enemy(Clone)")) {
-				Destroy (hit_taget.gameObject);
-			}
+			hit_taget.gameObject.GetComponent<EnemyAI> ().SendMessage ("GetDamaged", 10);
 		}
 	}
 
