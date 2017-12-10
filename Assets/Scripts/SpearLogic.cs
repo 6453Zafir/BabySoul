@@ -13,8 +13,6 @@ public class SpearLogic : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		this.transform.position += (move_direction.position - this.transform.position) * 10f * Time.deltaTime;
-		this.transform.LookAt (move_direction);
 		if (Vector3.Distance (this.transform.position, move_direction.position) < 1.0f) {
 			if (stopTime > 0) {
 				stopTime--;
@@ -25,6 +23,9 @@ public class SpearLogic : MonoBehaviour {
 				Destroy (move_direction.gameObject);
 				Destroy (this.gameObject);
 			}
+		} else {
+			this.transform.position += (move_direction.position - this.transform.position) * 10f * Time.deltaTime;
+			this.transform.LookAt (move_direction);
 		}
 	}
 
