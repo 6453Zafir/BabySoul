@@ -17,11 +17,13 @@ public class CampFire : MonoBehaviour
             return GetComponentInChildren<SpriteRenderer>();
         }
     }
-	// Use this for initialization
-	void Start ()
+
+    public Animator Anim;
+    // Use this for initialization
+    void Start ()
 	{
-        Unactivate();
-        _fireState = State.Unactivate;
+       // Unactivate();
+       // _fireState = State.Unactivate;
 
     }
 
@@ -41,12 +43,15 @@ public class CampFire : MonoBehaviour
     public void Activate()
     {
         _spriteRenderer.color = new Color(1,1,1,1);
+        Anim.SetBool("Activate", true);
         _fireState = State.Activate;;
     }
 
     public void Unactivate()
     {
-        _spriteRenderer.color = new Color(1, 1, 1, 0.5f);
+        //_spriteRenderer.color = new Color(1, 1, 1, 0.5f);
+        Anim.SetBool("Activate", false);
+
         _fireState = State.Unactivate;
 
     }
