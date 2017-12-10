@@ -29,7 +29,7 @@ public class EnemyAI : MonoBehaviour {
 			agent.angularSpeed = 60;
 			agent.SetDestination (baby.position);
 			if (Vector3.Distance (this.transform.position, player.transform.position) <= 3f) {
-				health--;
+				GetDamaged (1);
                 float pitch = Random.Range(1f, 4f);
                 if (pitch < 2)
                 {
@@ -49,10 +49,18 @@ public class EnemyAI : MonoBehaviour {
                 BabyAI.BabyHealth-=10;
             }
         }
+	}
+
+	public void GetDamaged(int damage){
+		health -= damage;
 		if (health <= 0) {
-            float pitch = Random.Range(0.1f, 2f);
-			SoundManager.Instance.PlayOneshot (AudioClass.ghost.ghost_die,true, pitch,pitch);
-			Destroy (this.gameObject);
+			Die ();
 		}
+	}
+
+	void Die(){
+		float pitch = Random.Range(0.1f, 2f);
+		SoundManager.Instance.PlayOneshot (AudioClass.ghost.ghost_die,true, pitch,pitch);
+		Destroy (this.gameObject);
 	}
 }

@@ -13,7 +13,13 @@ public class SpearLogic : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (move_direction == null) {
+			Time.timeScale = 1f;
+			Destroy (this.gameObject);
+		}
 		if (Vector3.Distance (this.transform.position, move_direction.position) < 1.0f) {
+			move_direction.gameObject.GetComponent<EnemyAI> ().enabled = false;
+			this.transform.position += (move_direction.position - this.transform.position) * 2f * Time.deltaTime;
 			if (stopTime > 0) {
 				stopTime--;
 				Time.timeScale = 0.1f;
@@ -21,6 +27,7 @@ public class SpearLogic : MonoBehaviour {
 				Time.timeScale = 1f;
 				SoundManager.Instance.PlayOneshot (AudioClass.player.bingo);
 				Destroy (move_direction.gameObject);
+				move_direction.gameObject.GetComponent<EnemyAI> ().SendMessage ("GetDamaged", 10);
 				Destroy (this.gameObject);
 			}
 		} else {
