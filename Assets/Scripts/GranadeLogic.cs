@@ -139,7 +139,7 @@ public class GranadeLogic : MonoBehaviour {
 		GameObject explosion = Instantiate (explosion_prefab, this.transform);
 		Renderer renderer = explosion.GetComponent<Renderer> ();
 		renderer.material.color = new Color (0.5f, 0f, 0f, 0.1f);
-		Collider[] hit_target_list = Physics.OverlapSphere (this.gameObject.transform.position, 2f);
+		Collider[] hit_target_list = Physics.OverlapSphere (this.gameObject.transform.position, 4f);
 		foreach (Collider hit_taget in hit_target_list) {
 			if (string.Equals (hit_taget.gameObject.name, "Enemy(Clone)")) {
 				Destroy (hit_taget.gameObject);

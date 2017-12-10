@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpearLogic : MonoBehaviour {
 	Transform move_direction;
 	Ray ray;
+	int stopTime = 20;
 
 	// Use this for initialization
 	void Start () {
@@ -15,9 +16,15 @@ public class SpearLogic : MonoBehaviour {
 		this.transform.position += (move_direction.position - this.transform.position) * 10f * Time.deltaTime;
 		this.transform.LookAt (move_direction);
 		if (Vector3.Distance (this.transform.position, move_direction.position) < 1.0f) {
-			SoundManager.Instance.PlayOneshot (AudioClass.player.bingo);
-			Destroy (move_direction.gameObject);
-			Destroy (this.gameObject);
+			if (stopTime > 0) {
+				stopTime--;
+				Time.timeScale = 0.1f;
+			} else {
+				Time.timeScale = 1f;
+				SoundManager.Instance.PlayOneshot (AudioClass.player.bingo);
+				Destroy (move_direction.gameObject);
+				Destroy (this.gameObject);
+			}
 		}
 	}
 
