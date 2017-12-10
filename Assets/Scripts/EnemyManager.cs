@@ -19,7 +19,7 @@ public class EnemyManager : MonoBehaviour {
 		transforms.Sort (delegate(Transform a, Transform b) {
 			return a.name.CompareTo (b.name);
 		});
-		manager = transforms.ToArray ();
+		EnemySpawnPoint = transforms.ToArray ();
 		index = 0;
 
 	}
@@ -29,7 +29,7 @@ public class EnemyManager : MonoBehaviour {
 		if (index >= EnemySpawnPoint.Length) {
 			return;
 		}
-		if (Mathf.Abs (EnemySpawnPoint [index].position.x - baby.transform.position)) {
+		if (Mathf.Abs (EnemySpawnPoint [index].position.x - baby.transform.position.x) < 2.0f) {
 			Vector3 rand_pos = EnemySpawnPoint [index].position;
 			float pitch = Random.Range (0.2f, 3f);
 			if (pitch >= 1.2f) {
