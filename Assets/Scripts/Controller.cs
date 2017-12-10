@@ -49,33 +49,63 @@ public class Controller : MonoBehaviour
 		}
 	}
 
+    private bool IsWithArrow
+    {
+        get { return UIController.ArrowLeft == 1; }
+    }
+    public Animator PlayerAnimator;
+    public SpriteRenderer SpriteRendererer;
+    enum AnimState
+    {
+        Stop,
+        Walk,
+        Boom,
+        Throw,
+        Granade
+    }
+
+    void TurnSide(bool isRight)
+    {
+        SpriteRendererer.flipX = isRight;
+    }
+
 	void KeyboardListener(){
         isFPCMoving = false;
+
         if (Input.GetKey (KeyCode.W)) {
 			this.transform.position += new Vector3 (0, 0, moveSpeed) * Time.deltaTime;
+            
             isFPCMoving = true;
 		}
 		if (Input.GetKey (KeyCode.S)) {
-			this.transform.position += new Vector3 (0, 0, -moveSpeed) * Time.deltaTime;
+            this.transform.position += new Vector3(0, 0, -moveSpeed) * Time.deltaTime;
             isFPCMoving = true;
 		}
 		if (Input.GetKey (KeyCode.A)) {
 			this.transform.position += new Vector3 (-moveSpeed, 0, 0) * Time.deltaTime;
+            TurnSide(false);
             isFPCMoving = true;
 		}
 		if (Input.GetKey (KeyCode.D)) {
 			this.transform.position += new Vector3 (moveSpeed, 0, 0) * Time.deltaTime;
+            TurnSide(true);
+
             isFPCMoving = true;
 		}
 		if (Input.GetKeyDown (KeyCode.Alpha1)) {
 			skill_selected = SKILLSELECTED.Granade;
-		}
-		if (Input.GetKeyDown (KeyCode.Alpha2)) {
+            PlayerAnimator.SetTrigger(AnimState.Granade.ToString());
+        }
+        if (Input.GetKeyDown (KeyCode.Alpha2)) {
 			skill_selected = SKILLSELECTED.Spear;
-		}
-		if (Input.GetKeyDown (KeyCode.Alpha3)) {
+            PlayerAnimator.SetTrigger(AnimState.Throw.ToString());
+
+        }
+        if (Input.GetKeyDown (KeyCode.Alpha3)) {
 			skill_selected = SKILLSELECTED.Suicide;
-			isDied = true;
+            PlayerAnimator.SetTrigger(AnimState.Boom.ToString());
+
+            isDied = true;
 		}
 
 		if (Input.GetMouseButtonDown(0))
@@ -117,8 +147,23 @@ public class Controller : MonoBehaviour
 				break;
 			}
 		}
+	    if (isFPCMoving && (_lastIsFpcMoving == false))
+	    {
+            PlayerAnimator.SetTrigger(AnimState.Walk.ToString());
+            PlayerAnimator.SetBool("With", IsWithArrow);
+	        Debug.Log("Walk");
+	    }
+	    if(!isFPCMoving && (_lastIsFpcMoving == true))
+	    {
+            PlayerAnimator.SetTrigger(AnimState.Stop.ToString());
+            PlayerAnimator.SetBool("With", IsWithArrow);
+            Debug.Log("Stop");
+
+        }
+        _lastIsFpcMoving = isFPCMoving;
 	}
 
+    private bool _lastIsFpcMoving = false;
     void OnTriggerEnter(Collider collider)
     {
         if (collider.tag == "CampFire")
