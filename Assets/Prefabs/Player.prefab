@@ -830,7 +830,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  granade_prefab: {fileID: 1698513400756482, guid: c9927456aec3442c2bbecafc8e47248b,
+  granade_prefab: {fileID: 1987535239963966, guid: 762911abb383e4089bba9319134dbe1d,
     type: 2}
   spear_prefab: {fileID: 1818118109956862, guid: 5cbcfd22478624af6956e219a7af474a,
     type: 2}

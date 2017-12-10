@@ -2,7 +2,8 @@
 {
     public enum baby {
         footstep_attacked,
-        footstep_normal
+        footstep_normal,
+        cry
     }
     public enum environment {
         bird,
