@@ -20,6 +20,14 @@ public class EnemyAI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         transform.LookAt(Camera.main.transform.position, Vector3.up);
+        if (Vector3.Distance(this.transform.position, baby.transform.position) <= 1.5f)
+        {
+            BabyAI.BabyHealth -= 1;
+            SoundManager.Instance.PlayLoop(AudioClass.baby.cry, false, true, 1f, 1.5f);
+        }
+        else {
+            SoundManager.Instance.StopSound("cry");
+        }
         afraid -= 1.0f * Time.deltaTime;
 		if (afraid >= 0f) {
 			
@@ -28,7 +36,7 @@ public class EnemyAI : MonoBehaviour {
 			agent.acceleration = 2;
 			agent.angularSpeed = 60;
 			agent.SetDestination (baby.position);
-			if (Vector3.Distance (this.transform.position, player.transform.position) <= 5f) {
+			if (Vector3.Distance (this.transform.position, player.transform.position) <= 3f) {
 				GetDamaged (1);
                 float pitch = Random.Range(1f, 4f);
                 if (pitch < 2)
@@ -42,17 +50,9 @@ public class EnemyAI : MonoBehaviour {
 				agent.speed = 10;
 				agent.acceleration = 10;
 				agent.angularSpeed = 360;
-				agent.SetDestination (2 * this.transform.position - player.position);
+                agent.SetDestination(2 * this.transform.position - player.position);
 			}
-            if (Vector3.Distance(this.transform.position, baby.transform.position) <= 3f)
-            {
-                BabyAI.BabyHealth-=5;
-                afraid = 0.2f;
-                agent.speed = 4;
-                agent.acceleration = 10;
-                agent.angularSpeed = 360;
-                agent.SetDestination(0.1f * this.transform.position - baby.position);
-            }
+          
         }
 	}
 

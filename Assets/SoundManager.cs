@@ -54,7 +54,15 @@ public class SoundManager : MonoSingleton<SoundManager>
     }
     */
     // 播放背景音乐，传进一个音频剪辑的name  
-    private void PlayLoopSound(object bgName, bool restart = false, bool isLoop = true)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="bgName"></param>
+    /// <param name="restart"></param>
+    /// <param name="isLoop"></param>
+    /// <param name="volume"></param>
+    /// <param name="pitch"></param>
+    private void PlayLoopSound(object bgName, bool restart = false, bool isLoop = true,float volume = 1,float pitch=1)
     {
         bool isAudioSourceExsit = false;
         AudioSource[] audioSources = gameObject.GetComponents<AudioSource>();
@@ -98,6 +106,8 @@ public class SoundManager : MonoSingleton<SoundManager>
                 m_bgMusic.clip = clip;
                 if (!m_bgMusic.isPlaying)
                 {
+                    m_bgMusic.volume = volume;
+                    m_bgMusic.pitch = pitch;
                     m_bgMusic.Play();
                 }
                 m_bgMusic.loop = isLoop;
@@ -131,22 +141,29 @@ public class SoundManager : MonoSingleton<SoundManager>
     }
     
 
-    //播放各种音频剪辑的调用方法，AudioClass是提前写好的存放各种音乐名称的枚举类，便于外面直接调用  
-    public void PlayLoop(AudioClass.environment bgName, bool restart = false)
+    //播放各种音频剪辑的调用方法，AudioClass是提前写好的存放各种音乐名称的枚举类，便于外面直接调用 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="bgName"></param>
+    /// <param name="restart"></param>
+    /// <param name="volume"></param>
+    /// <param name="pitch"></param>
+    public void PlayLoop(AudioClass.environment bgName, bool restart = false, bool isLoop = true, float volume = 1, float pitch = 1)
     {
-        PlayLoopSound(bgName, restart);
+        PlayLoopSound(bgName, restart, isLoop, volume, pitch);
     }
-    public void PlayLoop(AudioClass.player bgName, bool restart = false)
+    public void PlayLoop(AudioClass.player bgName, bool restart = false, bool isLoop = true, float volume = 1, float pitch = 1)
     {
-        PlayLoopSound(bgName, restart);
+        PlayLoopSound(bgName, restart, isLoop, volume, pitch);
     }
-    public void PlayLoop(AudioClass.baby bgName, bool restart = false)
+    public void PlayLoop(AudioClass.baby bgName, bool restart = false, bool isLoop = true, float volume = 1, float pitch = 1)
     {
-        PlayLoopSound(bgName, restart);
+        PlayLoopSound(bgName, restart, isLoop, volume, pitch);
     }
-    public void PlayLoop(AudioClass.ghost bgName, bool restart = false)
+    public void PlayLoop(AudioClass.ghost bgName, bool restart = false, bool isLoop = true, float volume = 1, float pitch = 1)
     {
-        PlayLoopSound(bgName, restart);
+        PlayLoopSound(bgName, restart, isLoop, volume, pitch);
     }
 
     // 播放音效  
